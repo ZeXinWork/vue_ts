@@ -8,7 +8,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUnmounted, onMounted } from 'vue'
+import { useClickOutside } from '../utils/useClickOutside'
+import { defineComponent, ref, watch } from 'vue'
+
+const useDropdownEffect = () => {
+  const isOpen = ref(false)
+  const dropdownRef = ref<null | HTMLElement>(null)
+  const toggleOpen = () => {
+    isOpen.value = !isOpen.value
+  }
+  const { isOutside } = useClickOutside(dropdownRef)
+  watch(isOutside, () => {
+    if (isOutside.value && isOpen.value) {
+      isOpen.value = false
+    } else {
+      isOpen.value = true
+    }
+  })
+  return { toggleOpen, isOpen, dropdownRef }
+}
 export default defineComponent({
   name: 'Dropdown',
   props: {
@@ -18,22 +36,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const isOpen = ref(false)
-    const dropdownRef = ref<null | HTMLElement>(null)
-    const toggleOpen = () => {
-      isOpen.value = !isOpen.value
-    }
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.value && !dropdownRef.value.contains(e.target as HTMLElement) && isOpen.value) {
-        isOpen.value = false
-      }
-    }
-    onMounted(() => {
-      document.addEventListener('click', handleClick)
-    })
-    onUnmounted(() => {
-      document.removeEventListener('click', handleClick)
-    })
+    const { toggleOpen, isOpen, dropdownRef } = useDropdownEffect()
     return { toggleOpen, isOpen, dropdownRef }
   }
 })

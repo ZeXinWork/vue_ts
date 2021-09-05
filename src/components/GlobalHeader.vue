@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4 ">
+  <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4">
     <a class="navbar-brand" href="#">者也专栏</a>
     <ul v-if="user && !user.isLogin" class="list-inline mb-0">
       <li class="list-inline-item">
