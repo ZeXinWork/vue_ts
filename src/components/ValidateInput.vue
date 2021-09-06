@@ -16,7 +16,8 @@
 
 <script lang="ts">
 import { emailReg } from '@/utils/reg'
-import { defineComponent, PropType, reactive } from 'vue'
+import { defineComponent, onMounted, PropType, reactive } from 'vue'
+import { emitter } from './ValidateForm.vue'
 
 export interface RuleProp {
   type: 'email' | 'required'
@@ -63,8 +64,14 @@ export default defineComponent({
           return pass
         })
         inputRef.err = !allPassed
+        return allPassed
       }
+      return true
     }
+
+    onMounted(() => {
+      emitter.emit('form-item-create', validateInput)
+    })
     return {
       inputRef,
       validateInput,
