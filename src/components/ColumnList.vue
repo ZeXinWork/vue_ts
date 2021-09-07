@@ -8,7 +8,7 @@
           <p class="card-text text-left">
             {{ column.description }}
           </p>
-          <a href="#" class="btn btn-outline-primary">进入专栏</a>
+          <router-link class="btn btn-outline-primary" :to="`/column/${column.id}`">进入专栏</router-link>
         </div>
       </div>
     </div>

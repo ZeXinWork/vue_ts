@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4">
-    <a class="navbar-brand" href="#">者也专栏</a>
-    <ul v-if="user && !user.isLogin" class="list-inline mb-0">
+    <a class="navbar-brand" href="#" @click="resetRouter">者也专栏</a>
+    <ul v-if="!user || (user && user.isLogin)" class="list-inline mb-0">
       <li class="list-inline-item">
-        <a href="#" class="btn btn-outline-light my-2">登录</a>
+        <a class="btn btn-outline-light my-2" @click="gotoLogin">登录</a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="btn btn-outline-light my-2">注册</a>
+        <a class="btn btn-outline-light my-2" @click="gotoLogin">注册</a>
       </li>
     </ul>
     <ul v-else class="list-inline mb-0">
@@ -29,12 +29,23 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { useRouter } from 'vue-router'
 import Dropdown from './Dropdown.vue'
 import DropdownItem from './DropdownItem.vue'
+import { resetRouter } from '../utils'
+
 export interface UserProps {
   isLogin: boolean
-  name?: string
+  name: string
   id?: number
+}
+
+const useLoginEffect = () => {
+  const router = useRouter()
+  const gotoLogin = () => {
+    router.push('/login')
+  }
+  return { gotoLogin }
 }
 
 export default defineComponent({
@@ -48,6 +59,10 @@ export default defineComponent({
   components: {
     Dropdown,
     DropdownItem
+  },
+  setup() {
+    const { gotoLogin } = useLoginEffect()
+    return { resetRouter, gotoLogin }
   }
 })
 </script>
