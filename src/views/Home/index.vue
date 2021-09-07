@@ -13,7 +13,7 @@
     </section>
     <h4 class="font-weight-bold text-center">发现精彩</h4>
     <column-list :list="list"></column-list>
-    <button class="btn btn-outline-primary mt-2 mb-5 mx-auto btn-block w-25" @click="loadMorePage" v-if="!isLastPage">
+    <button class="btn btn-outline-primary mt-2 mb-5 mx-auto btn-block w-25">
       加载更多
     </button>
   </div>
@@ -22,45 +22,44 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ColumnList, { ColumnListProps } from '../../components/ColumnList.vue'
-
+export const testData: ColumnListProps[] = [
+  {
+    id: 1,
+    title: 'title1专栏',
+    description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+    avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
+  },
+  {
+    id: 2,
+    title: 'title2专栏',
+    description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+    avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
+  },
+  {
+    id: 3,
+    title: 'title3专栏',
+    description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈'
+    // avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
+  },
+  {
+    id: 4,
+    title: 'title4专栏',
+    description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+    avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
+  },
+  {
+    id: 5,
+    title: 'title5专栏',
+    description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+    avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
+  }
+]
 export default defineComponent({
   name: 'Home',
   components: {
     ColumnList
   },
   setup() {
-    const testData: ColumnListProps[] = [
-      {
-        id: 1,
-        title: 'title1专栏',
-        description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-        avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
-      },
-      {
-        id: 2,
-        title: 'title2专栏',
-        description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-        avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
-      },
-      {
-        id: 3,
-        title: 'title3专栏',
-        description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈'
-        // avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
-      },
-      {
-        id: 4,
-        title: 'title4专栏',
-        description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-        avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
-      },
-      {
-        id: 5,
-        title: 'title5专栏',
-        description: '这是test3的专栏，有一段简介,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-        avatar: 'https://img2.baidu.com/it/u=3355464299,584008140&fm=26&fmt=auto&gp=0.jpg'
-      }
-    ]
     return {
       list: testData
     }

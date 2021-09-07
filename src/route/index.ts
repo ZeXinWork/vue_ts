@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/column/:id',
     name: 'column',
-    component: () => import(/* webpackChunkName: "shop" */ '../views/Column/index.vue')
+    component: () => import(/* webpackChunkName: "shop" */ '../views/ColumnDetail/index.vue')
   }
 ]
 
