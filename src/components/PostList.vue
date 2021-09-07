@@ -35,7 +35,6 @@ export default defineComponent({
     }
   },
   setup(prop) {
-    console.log(prop.list, 'prop.list')
     return {
       postList: prop.list
     }

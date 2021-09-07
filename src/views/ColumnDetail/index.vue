@@ -14,15 +14,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { testData } from '../Home/index.vue'
-import PostList, { PostProps } from '@/components/PostList.vue'
-
-const testPosts: PostProps[] = [
-  { id: 1, title: '这是我的第一篇文章', content: '这是content', columnId: 1, createdAt: '2020-06-11 10:34:22' },
-  { id: 2, title: '这是我的第二篇文章', content: '这是content', columnId: 1, createdAt: '2020-06-12 10:34:22' }
-]
+import { useStore } from 'vuex'
+import PostList from '@/components/PostList.vue'
+import { GlobalDataProps } from '@/store/store'
 export default defineComponent({
   name: 'Column',
   components: {
@@ -30,10 +26,10 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute()
+    const store = useStore<GlobalDataProps>()
     const currentId = +route.params.id
-    const column = testData.find(c => c.id === currentId)
-    const list = testPosts.filter(post => (post.columnId = currentId))
-    console.log(list, 'list')
+    const column = computed(() => store.getters.getColumns(currentId))
+    const list = computed(() => store.getters.getDetail(currentId))
     return {
       column,
       list

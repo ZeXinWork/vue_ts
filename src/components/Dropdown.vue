@@ -18,13 +18,13 @@ const useDropdownEffect = () => {
     isOpen.value = !isOpen.value
   }
   const { isOutside } = useClickOutside(dropdownRef)
+  console.log(isOutside, 'isOutside')
   watch(isOutside, () => {
-    if (isOutside.value && isOpen.value) {
+    if (isOpen.value && isOutside.value) {
       isOpen.value = false
-    } else {
-      isOpen.value = true
     }
   })
+  console.log(isOpen, 'iss')
   return { toggleOpen, isOpen, dropdownRef }
 }
 export default defineComponent({

@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import ValidateInput, { RulesProp } from '../../components/ValidateInput.vue'
 import ValidateForm from '../../components/ValidateForm.vue'
 import { emailReg } from '@/utils/reg'
@@ -78,10 +79,11 @@ const usePasswordEffect = () => {
 
 const useFormSubmit = () => {
   const router = useRouter()
-
+  const store = useStore()
   const onFormSubmit = (result: boolean) => {
     if (result) {
       router.push('/')
+      store.commit('login')
     }
   }
   return { onFormSubmit }

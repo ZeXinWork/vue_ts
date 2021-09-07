@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4">
     <a class="navbar-brand" href="#" @click="resetRouter">者也专栏</a>
-    <ul v-if="!user || (user && user.isLogin)" class="list-inline mb-0">
+    <ul v-if="!user || (user && !user.isLogin)" class="list-inline mb-0">
       <li class="list-inline-item">
         <a class="btn btn-outline-light my-2" @click="gotoLogin">登录</a>
       </li>
@@ -19,7 +19,7 @@
             <a href="#" class="dropdown-item">编辑资料</a>
           </dropdown-item>
           <dropdown-item>
-            <a href="#" class="dropdown-item">退出登录</a>
+            <a href="#" class="dropdown-item" @click="logout">退出登录</a>
           </dropdown-item>
         </Dropdown>
       </li>
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import Dropdown from './Dropdown.vue'
 import DropdownItem from './DropdownItem.vue'
 import { resetRouter } from '../utils'
@@ -48,6 +49,16 @@ const useLoginEffect = () => {
   return { gotoLogin }
 }
 
+const userLogoutEddect = () => {
+  const router = useRouter()
+  const store = useStore()
+  const logout = () => {
+    router.push('/')
+    store.commit('logout')
+  }
+  return { logout }
+}
+
 export default defineComponent({
   name: 'GlobalHeader',
   props: {
@@ -62,7 +73,8 @@ export default defineComponent({
   },
   setup() {
     const { gotoLogin } = useLoginEffect()
-    return { resetRouter, gotoLogin }
+    const { logout } = userLogoutEddect()
+    return { resetRouter, gotoLogin, logout }
   }
 })
 </script>
